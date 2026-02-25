@@ -43,7 +43,10 @@ if prompt := st.chat_input("Ask a question about the Titanic...", disabled=not u
                 if user_api_key:
                     payload["api_key"] = user_api_key
                     
-                response = requests.post(API_URL, json=payload)
+                headers = {
+                    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36"
+                }
+                response = requests.post(API_URL, json=payload, headers=headers)
                 if response.status_code == 200:
                     data = response.json()
                     answer = data.get("answer", "No answer provided.")
