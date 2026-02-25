@@ -1,7 +1,10 @@
 import streamlit as st
+import os
 import requests
 
-API_URL = "http://localhost:8000/ask"
+# Use environment variable for the backend URL if deployed, otherwise use localhost
+BACKEND_URL = os.environ.get("BACKEND_URL", "http://localhost:8000")
+API_URL = f"{BACKEND_URL}/ask"
 
 st.set_page_config(page_title="Titanic Chatbot", page_icon="🚢", layout="centered")
 
@@ -23,7 +26,7 @@ for message in st.session_state.messages:
     with st.chat_message(message["role"]):
         st.markdown(message["content"])
         if message.get("plot_url"):
-            st.image(f"http://localhost:8000{message['plot_url']}")
+            st.image(f"{BACKEND_URL}{message['plot_url']}")
 
 # React to user input
 if prompt := st.chat_input("Ask a question about the Titanic...", disabled=not user_api_key):
@@ -48,7 +51,7 @@ if prompt := st.chat_input("Ask a question about the Titanic...", disabled=not u
                     
                     st.markdown(answer)
                     if plot_url:
-                        st.image(f"http://localhost:8000{plot_url}")
+                        st.image(f"{BACKEND_URL}{plot_url}")
                         
                     st.session_state.messages.append({"role": "assistant", "content": answer, "plot_url": plot_url})
                 else:

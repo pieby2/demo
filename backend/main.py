@@ -17,6 +17,10 @@ app = FastAPI(title="Titanic Chatbot API")
 os.makedirs("backend/static", exist_ok=True)
 app.mount("/static", StaticFiles(directory="backend/static"), name="static")
 
+@app.get("/")
+def read_root():
+    return {"status": "ok", "message": "Titanic Chatbot API is running!"}
+
 # Load Titanic Dataset
 try:
     df = pd.read_csv("data/titanic.csv")
