@@ -7,11 +7,21 @@ from pydantic import BaseModel
 import pandas as pd
 from langchain_experimental.agents.agent_toolkits import create_pandas_dataframe_agent
 from langchain_google_genai import ChatGoogleGenerativeAI
+from fastapi.middleware.cors import CORSMiddleware
 from dotenv import load_dotenv
 
 load_dotenv()
 
 app = FastAPI(title="Titanic Chatbot API")
+
+# Add CORS middleware to allow the Streamlit frontend to communicate with the API
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Allows all origins
+    allow_credentials=True,
+    allow_methods=["*"],  # Allows all methods (GET, POST, etc.)
+    allow_headers=["*"],  # Allows all headers
+)
 
 # Ensure static directory exists
 os.makedirs("backend/static", exist_ok=True)
