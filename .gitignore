@@ -1,29 +1,6 @@
-# Virtual environment
-venv/
-.venv/
-env/
-
-# Python bytecode
+.env
 __pycache__/
-*.py[cod]
-*.pyo
-
-# IDE / editor files
-.vscode/
-.idea/
-*.swp
-*.swo
-
-# OS files
+*.pyc
+backend/static/*.png
+backend/static/*.jpg
 .DS_Store
-Thumbs.db
-
-# Distribution / packaging
-dist/
-build/
-*.egg-info/
-
-# Sentence-transformer model cache (auto-downloaded)
-# The model is cached in ~/.cache/huggingface by default, but
-# if it ends up in the project dir, ignore it.
-models/

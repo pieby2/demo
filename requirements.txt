@@ -1,3 +1,12 @@
-numpy
-sentence-transformers
-scikit-learn
+fastapi
+uvicorn
+streamlit
+langchain
+langchain-experimental
+langchain-google-genai
+pandas
+matplotlib
+seaborn
+python-dotenv
+requests
+python-multipart

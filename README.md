@@ -1,71 +1,40 @@
-# Message Similarity Finder 🔍
+# Titanic Chatbot 🚢
 
-Hey there! This is a simple Python tool I built to find similar messages using cosine similarity. It takes your input, converts it into a vector (using `sentence-transformers` locally), and finds the best matches from our hardcoded list of messages.
+A friendly chatbot that analyzes the Titanic dataset. Ask questions in plain English and get text answers and visual insights!
 
-No external APIs needed—everything runs right on your machine.
+## Features
+- **Natural Language Questions**: Ask things like "What percentage of passengers were male?"
+- **Visualizations**: Request plots like "Show me a histogram of passenger ages".
+- **Clean Interface**: Built with Streamlit for an intuitive chat experience.
+- **Agentic Backend**: Powered by FastAPI, LangChain, and Google Gemini.
 
-## How it Works
-1. **Embeddings**: We use the `all-MiniLM-L6-v2` model to turn text into numbers (vectors).
-2. **Comparison**: We calculate the cosine similarity between your input vector and our message vectors.
-3. **ranking**: We just sort them by score and show you the top ones.
+## Requirements
+- Python 3.9+ 
+- A Google Gemini API Key.
 
-## Getting Started
+## Setup Instructions
 
-### Prerequisites
-You'll need Python 3.8+ installed.
-
-### Setup
-1. Clone the repo.
-2. Create a virtual env (recommended):
-   ```bash
-   python -m venv venv
-   # Windows
-   venv\Scripts\activate
-   # Mac/Linux
-   source venv/bin/activate
-   ```
-3. Install the dependencies:
+1. **Install dependencies**:
    ```bash
    pip install -r requirements.txt
    ```
-   *(Note: The first time you run it, it'll download the model ~80MB. Subsequent runs are instant.)*
 
-## Usage
+2. **Add your API Key**:
+   Open the `.env` file and replace `your_api_key_here` with your actual Google Gemini API Key:
+   ```
+   GEMINI_API_KEY=your_actual_key
+   ```
 
-You can run it in interactive mode:
-```bash
-python main.py
-```
+3. **Run the Backend**:
+   In a terminal, run:
+   ```bash
+   uvicorn backend.main:app --reload --port 8000
+   ```
 
-Or pass your query directly:
-```bash
-python main.py "locked out of my account"
-```
+4. **Run the Frontend**:
+   In a separate terminal, run:
+   ```bash
+   streamlit run frontend/app.py
+   ```
 
-### Options
-* `--top` or `-k`: How many results you want (default is 3).
-* `--category` or `-c`: Filter by category (e.g., `tech_support`, `greetings`).
-* `--add`: Add a temporary message to the list for testing.
-
-### Examples
-
-**Basic search:**
-```bash
-python main.py "hey how are you"
-```
-
-**Filter by category:**
-```bash
-python main.py "pricing" -c product_inquiries
-```
-
-**Show top 5 results:**
-```bash
-python main.py "not working" -k 5
-```
-
-## Project Structure
-* `main.py`: The entry point. Handles the CLI and prints results.
-* `data/messages.py`: Contains our hardcoded list of messages.
-* `embeddings/`: Helper class to load the model and generate embeddings.
-* `utils/`: Math stuff (cosine similarity logic).
+6. Open `http://localhost:8501` in your browser and start chatting!
